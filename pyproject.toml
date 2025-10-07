@@ -1,0 +1,10 @@
+[project]
+name = "pert-mcp"
+version = "0.0.1"
+description = "An LLM- and MCP-based PERT chart client"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+   "fastapi==0.118.0", 
+   "uvicorn==0.37.0",
+]
