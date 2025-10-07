@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    tty: true
+    volumes:
+      - ./src:/home/nonroot/app/src
+    ports:
+      - "8000:8000"
