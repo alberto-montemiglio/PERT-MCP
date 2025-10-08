@@ -7,10 +7,14 @@ services:
         UID: ${UID}
         GID: ${GID}
     tty: true
+    environment:
+      - NEO4J_DB_USER=$NEO4J_DB_USER
+      - NEO4J_DB_PASSWORD=$NEO4J_DB_PASSWORD
+      - NEO4J_DB_URI=$NEO4J_DB_URI
     volumes:
       - ./src:/home/nonroot/app/src
     ports:
-      - "8000:8000"
+      - ${FASTAPI_SERVER_PORT}:8000
   
   neo4j:
     image: neo4j:2025-bullseye
@@ -20,7 +24,7 @@ services:
         - ./neo4j/data:/data
         - ./neo4j/plugins:/plugins
     environment:
-        - NEO4J_AUTH=$NEO4J_USER/$NEO4J_PWD
+        - NEO4J_AUTH=$NEO4J_DB_USER/$NEO4J_DB_PASSWORD
     ports:
       - "7474:7474"
       - "7687:7687"

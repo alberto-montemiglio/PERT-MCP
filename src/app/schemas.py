@@ -1,8 +1,14 @@
 from pydantic import BaseModel
 
 
+class Activity(BaseModel):
+    id: str
+    name: str
+    from_event_id: str
+    to_event_id: str
+    duration: int
+    cost: float
+
 class Event(BaseModel):
     id: str
-    predecessors_ids: list[str]
     name: str
-    successors_ids: list[str]

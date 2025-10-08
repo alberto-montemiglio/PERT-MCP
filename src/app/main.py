@@ -1,10 +1,26 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from app.routers import graph_db
+from neo4j import AsyncGraphDatabase, Auth
 
-app = FastAPI()
-app.include_router(graph_db.router)
+from app.routers import events, activities
+from utils import get_env_variable
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.state.driver = AsyncGraphDatabase.driver(
+        uri=get_env_variable("NEO4J_DB_URI"),
+        auth=Auth("basic", get_env_variable("NEO4J_DB_USER"), get_env_variable("NEO4J_DB_PASSWORD"))
+    )
+    yield
+    await app.state.driver.close()
+
+
+app = FastAPI(lifespan=lifespan)
+app.include_router(events.router)
+app.include_router(activities.router)
 
 # Redirect root to docs
 @app.get("/")
