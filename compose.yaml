@@ -20,7 +20,7 @@ services:
         - ./neo4j/data:/data
         - ./neo4j/plugins:/plugins
     environment:
-        - NEO4J_AUTH=neo4j/your_password
+        - NEO4J_AUTH=$NEO4J_USER/$NEO4J_PWD
     ports:
       - "7474:7474"
       - "7687:7687"
