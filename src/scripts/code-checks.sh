@@ -11,3 +11,13 @@ if [ $? -ne 0 ]; then
 else
     echo -e "${TEXT_GREEN}Ruff passed.${NC}"
 fi;
+
+
+echo -e "${HIGHLIGHT}Running mypy...${NC}"
+uv run mypy .
+if [ $? -ne 0 ]; then
+    echo -e "${TEXT_RED}Mypy errors must be resolved before committing.${NC}"
+    exit 1
+else
+    echo -e "${TEXT_GREEN}Mypy passed.${NC}"
+fi
