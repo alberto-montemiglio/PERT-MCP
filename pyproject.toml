@@ -8,3 +8,12 @@ dependencies = [
    "fastapi==0.118.0", 
    "uvicorn==0.37.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff==0.14.0",
+]
+
+[tool.ruff]
+lint.extend-select = ["I"]
+fix=true
