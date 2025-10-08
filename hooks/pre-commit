@@ -1,0 +1,11 @@
+# This hook runs code checks inside the Docker container
+
+# To set up this hook, run the following:
+#   cp hooks/pre-commit .git/hooks/pre-commit
+#   chmod +x hooks/pre-commit
+
+# To override this hook, add the following flag when committing:
+#   git commit --no-verify
+
+
+docker compose exec -T app /bin/bash /home/nonroot/app/src/scripts/code-checks.sh
