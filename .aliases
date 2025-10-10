@@ -1,0 +1,10 @@
+# The following aliases are provided for project level convenience.
+# To load these aliases, run or add to your .bashrc:
+# source .aliases
+
+alias build='docker compose up --build'
+alias down='docker compose down'
+alias up='docker compose up'
+alias app-bash='docker compose exec app bash'
+alias format='docker compose exec app /usr/bin/uv run ruff format'
+alias code-checks='docker compose exec app /usr/bin/bash /home/nonroot/app/src/scripts/code-checks.sh'
