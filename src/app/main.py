@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from neo4j import AsyncGraphDatabase, Auth
 
-from app.routers import activities, events
+from app.routers import activities, events, visualise
 from app.services import create_event_uniqueness_constraints, wait_for_db_connection
 from utils import get_env_variable
 
@@ -33,6 +33,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 app.include_router(events.router)
 app.include_router(activities.router)
+app.include_router(visualise.router)
 
 
 # Redirect root to docs
