@@ -6,6 +6,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Ensure stdout and stderr are unbuffered
 ENV PYTHONUNBUFFERED=1
 
+# Do not automatically update the lockfile
+ENV UV_FROZEN=1
+
 # Update system dependencies
 RUN apt-get update \
     && apt-get clean \
@@ -32,8 +35,6 @@ RUN uv sync --frozen
 # Copy application source code, overwriting previous documents (pyproject.toml, uv.lock)
 COPY --chown=nonroot:nonroot src/ src/
 
-# Set working directory to the application source code
-WORKDIR /home/nonroot/app/src
-
 # Run the application with auto-reload for development
-CMD [ "uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload" ]
+# CMD [ "uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload" ]
+CMD [ "uv", "run", "python", "app/mcp_server.py" ]
