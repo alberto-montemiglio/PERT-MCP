@@ -8,4 +8,4 @@
 #   git commit --no-verify
 
 
-docker compose exec -T app /bin/bash /home/nonroot/app/src/scripts/code-checks.sh
+docker compose exec -T app /usr/bin/bash /app/src/scripts/code-checks.sh
